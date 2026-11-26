@@ -11,6 +11,27 @@
       "ru",
     ],
   },
+  "packages": [
+    {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-generator",
+      "version": {
+        "up-to-next-major-version": "1.14.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-runtime/",
+      "version": {
+        "up-to-next-major-version": "1.13.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-urlsession",
+      "version": {
+        "up-to-next-major-version": "1.4.0",
+      },
+    },
+  ],
   "files": [
     { "kind": "folder", "path": "TravelScheduleApp", "target-membership": [ "TravelScheduleApp" ] },
     {
@@ -27,10 +48,24 @@
       "id": "78609ADC30B7EBEC00D88F04",
       "product": "Products/TravelScheduleApp.app",
       "product-type": "application",
+      "dependencies": [
+        { "kind": "package", "package": "swift-openapi-generator", "product-name": "OpenAPIGenerator", "product-type": "build-tool-plugin" },
+      ],
       "build-phases": [
         "compile-sources",
         "frameworks",
         "resources",
+      ],
+      "package-product-members": [
+        {
+          "package": "swift-openapi-runtime",
+          "product-name": "OpenAPIRuntime",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "swift-openapi-urlsession",
+          "product-name": "OpenAPIURLSession",
+          "build-phase": { "build-phase": "frameworks" },
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",

@@ -1,8 +1,8 @@
 {
   "default-configuration": "Release",
   "configurations": [
-    "Debug",
-    "Release",
+    { "name": "Debug", "file": { "anchor": "TravelScheduleApp", "relative-path": "Resources/APIKey/APIKey.xcconfig" } },
+    { "name": "Release", "file": { "anchor": "TravelScheduleApp", "relative-path": "Resources/APIKey/APIKey.xcconfig" } },
   ],
   "localizations": {
     "development": "en",
@@ -11,9 +11,43 @@
       "ru",
     ],
   },
-  "files": [
-    { "kind": "folder", "path": "TravelScheduleApp", "target-membership": [ "TravelScheduleApp" ] },
+  "packages": [
     {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-generator",
+      "version": {
+        "up-to-next-major-version": "1.14.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-runtime/",
+      "version": {
+        "up-to-next-major-version": "1.13.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/apple/swift-openapi-urlsession",
+      "version": {
+        "up-to-next-major-version": "1.4.0",
+      },
+    },
+  ],
+  "files": [
+    {
+      "kind": "folder",
+      "path": "TravelScheduleApp",
+      "target-membership": [
+        "TravelScheduleApp",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "TravelScheduleApp",
+          "exclusions": [
+            "Resources/Info.plist",
+          ],
+        },
+      ],
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [
@@ -27,10 +61,28 @@
       "id": "78609ADC30B7EBEC00D88F04",
       "product": "Products/TravelScheduleApp.app",
       "product-type": "application",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "TravelScheduleApp", "relative-path": "Resources/APIKey/APIKey.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "TravelScheduleApp", "relative-path": "Resources/APIKey/APIKey.xcconfig" } },
+      ],
+      "dependencies": [
+        { "kind": "package", "package": "swift-openapi-generator", "product-name": "OpenAPIGenerator", "product-type": "build-tool-plugin" },
+      ],
       "build-phases": [
         "compile-sources",
         "frameworks",
         "resources",
+      ],
+      "package-product-members": [
+        {
+          "package": "swift-openapi-runtime",
+          "product-name": "OpenAPIRuntime",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "swift-openapi-urlsession",
+          "product-name": "OpenAPIURLSession",
+          "build-phase": { "build-phase": "frameworks" },
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
@@ -40,6 +92,7 @@
         "DEVELOPMENT_TEAM": "649X9UT2AK",
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
+        "INFOPLIST_FILE": "TravelScheduleApp/Resources/Info.plist",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
         "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",

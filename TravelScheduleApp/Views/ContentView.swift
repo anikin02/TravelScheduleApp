@@ -9,25 +9,22 @@ import SwiftUI
 import OpenAPIURLSession
 
 struct ContentView: View {
+  @State var selectedTab: Int = 0
+  
   var body: some View {
-    VStack {
-      Image(systemName: "globe")
-        .imageScale(.large)
-        .foregroundStyle(.tint)
-      Text("Hello, world!")
-    }
-    .padding()
-    .onAppear {
-//      Данные методы закрыты в комментария, чтобы не тратить ограничения на запросы
-//      при постоянном обновлении Preview
-//      testFetchStations()
-//      testFetchCopyright()
-//      testFetchAllStations()
-//      testFetchScheduleBetweenStations()
-//      testFetchStationSchedule()
-//      testFetchRouteStations()
-//      testFetchNearestCity()
-//      testFetchCarrierInfo()
+    TabView(selection: $selectedTab) {
+      MainView()
+        .tabItem {
+          Image(.mainTab)
+        }
+        .tag(0)
+      
+      SettingView()
+        .tabItem {
+          Image(.settingTab)
+        }
+        .tag(1)
+      
     }
   }
   

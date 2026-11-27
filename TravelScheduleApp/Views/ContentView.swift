@@ -155,7 +155,6 @@ struct ContentView: View {
           transport: URLSessionTransport()
         )
         
-        // uid рейса берём из реального ответа поиска
         let scheduleService = ScheduleBetweenStationsService(
           client: client,
           apikey: APIKeyStorage.apiKey
@@ -172,7 +171,7 @@ struct ContentView: View {
         
         let service = RouteStationsService(
           client: client,
-          apikey: "729449cb-170a-4d7d-884d-4d8181f68555"
+          apikey: APIKeyStorage.apiKey
         )
         
         print("Fetching route stations for \(uid)...")
